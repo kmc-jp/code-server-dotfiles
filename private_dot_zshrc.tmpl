@@ -143,35 +143,5 @@ export PATH="${HOME}/.bin/:$PATH"
 
 export EDITOR=vim
 
-#$(chezmoi git pull -- --autostash --rebase >> /dev/null 2>> /dev/null &)
-#$(chezmoi apply >> /dev/null 2>> /dev/null &)
-$(git -C ~/.ssh pull >> /dev/null 2>> /dev/null &)
-
 alias "sudo"="sudo "
-{{ if (ne .chezmoi.hostname "rikka") }}
-alias bat="batcat"
-{{ end }}
-alias fd=fdfind
-alias gr=rg
 alias "$"=""
-
-alias 'k'='kubectl'
-{{ if or (eq .chezmoi.hostname "cake") (eq .chezmoi.hostname "rikka") }}
-[[ /usr/bin/kubectl ]] && source <(kubectl completion zsh)
-[[ /usr/bin/helm ]] && source <(helm completion zsh)
-[[ /usr/bin/flux ]] && source <(flux completion zsh)
-{{ end }}
-
-export PATH="$HOME/.plenv/bin:$PATH"
-eval "$(plenv init - zsh)"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-alias "ghqcd"="cd \$(ghq root)'/'\$(ghq list | peco)"
-
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
